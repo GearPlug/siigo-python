@@ -48,7 +48,7 @@ class Client(object):
         Request attributes: \n
         code: must be a unique value \n
         account_group: account group id, get list from: list_account_groups() \n
-        type    : options are 'Product', 'Service' or 'ConsumerGood' \n
+        type: options are 'Product', 'Service' or 'ConsumerGood' \n
         tax_classification: options are 'Taxed', 'Exempt' or 'Excluded' \n
         taxes: list of dictionaries with the following structure:
         [{"id": "1234"}] \n

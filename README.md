@@ -13,7 +13,6 @@ pip install siigo-python
 from siigo.client import Client
 client = Client(email, access_key)
 ```
-To set an access token:
 1. **Generate access token**
 ```python
 response = client.generate_token()
@@ -38,7 +37,7 @@ users = client.list_users()
 product = client.create_product("AAAAA111233", "PS6", 1254, "Product")
 # code: must be a unique value
 # account_group: account group id, get list from: list_account_groups()
-# type    : options are 'Product', 'Service' or 'ConsumerGood'
+# type: options are 'Product', 'Service' or 'ConsumerGood'
 # tax_classification: options are 'Taxed', 'Exempt' or 'Excluded'
 # taxes: list of dictionaries with the following structure:
 #   [{"id": "1234"}]
