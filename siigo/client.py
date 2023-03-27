@@ -25,6 +25,26 @@ class Client(object):
     def list_users(self):
         return self.get("v1/users")
 
+    def list_products(
+        self,
+        code: str = None,
+        created_start: str = None,
+        created_end: str = None,
+        updated_start: str = None,
+        updated_end: str = None,
+        id: str = None,
+    ):
+        """
+        date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
+        id: Is possible to filter multiple ids at the same time separated by commas.
+        """
+        args = locals()
+        params = {}
+        for arg in args:
+            if args[arg] is not None and arg != "self":
+                params.update({arg: args[arg]})
+        return self.get("v1/products", params=params)
+
     def create_product(
         self,
         code: str,
@@ -70,6 +90,25 @@ class Client(object):
                 body.update({arg: args[arg]})
         return self.post("v1/products", data=json.dumps(body))
 
+    def list_customers(
+        self,
+        identification: str = None,
+        branch_office: int = None,
+        created_start: str = None,
+        created_end: str = None,
+        updated_start: str = None,
+        updated_end: str = None,
+    ):
+        """
+        date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
+        """
+        args = locals()
+        params = {}
+        for arg in args:
+            if args[arg] is not None and arg != "self":
+                params.update({arg: args[arg]})
+        return self.get("v1/customers", params=params)
+
     def create_customer(
         self,
         person_type: str,
@@ -99,7 +138,7 @@ class Client(object):
             {
             "first_name": "Marcos",
             "last_name": "Castillo",
-            "email": "marcos.castillo@contacto.com", 
+            "email": "marcos.castillo@contacto.com",
             "phone": {"indicative": "57", "number": "3006003345", "extension": "132"}
             }
         ]
@@ -113,7 +152,7 @@ class Client(object):
         } \n
         phones: list of dictionaries with the following structure:
         [{"indicative": "57", "number": "3006003345", "extension": "132"}] \n
-        related_users: dictionary with two values "seller_id" and "collector_id", 
+        related_users: dictionary with two values "seller_id" and "collector_id",
         Example: {"seller_id": 629, "collector_id": 629}
         """
         args = locals()
@@ -136,6 +175,26 @@ class Client(object):
         observations: str = None,
         additional_fields: dict = None,
     ):
+        """
+        document: document type id. Dict with the following structure: {"id": 24446} \n
+        date: yyyy-MM-dd format \n
+        customer: customer identification and branch_office - {"identification": "13832081", "branch_office": 0} \n
+        seller: seller id \n
+        items: list of items with the following structure: \n
+        [
+            {
+                "code": "Item-1", # must be a valid code.
+                "description": "Camiseta de algodón",
+                "quantity": 1,
+                "price": 1069.77,
+                "discount": 0,
+                "taxes": [{"id": 13156}]
+            }
+        ] \n
+        payments: list with the following structure: [{"id": 5636, "value": 1273.03, "due_date": "2021-03-19"}] \n
+        currency: only for foreign exchange currency: {"code": "USD", "exchange_rate": 3825.03} \n
+        Note: The total payments must be equal to the total invoice.
+        """
         args = locals()
         body = {}
         for arg in args:
@@ -154,6 +213,20 @@ class Client(object):
 
     def list_cost_centers(self):
         return self.get("v1/cost-centers")
+
+    def list_document_types(self, doc_type: str):
+        """
+        doc_type: options are "FV", "NC" or "RC"
+        """
+        params = {"type": doc_type}
+        return self.get("v1/document-types", params=params)
+
+    def list_payment_types(self, doc_type: str):
+        """
+        doc_type: options are "FV", "NC" or "RC"
+        """
+        params = {"document_type": doc_type}
+        return self.get("v1/payment-types", params=params)
 
     def get(self, endpoint, **kwargs):
         response = self.request("GET", endpoint, **kwargs)

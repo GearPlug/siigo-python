@@ -32,6 +32,13 @@ client = Client(token=access_token)
 users = client.list_users()
 ```
 ### Products
+#### - List products
+```python
+# filter options: code, created_start, created_end, updated_start, updated_end, id
+# date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
+# id: It is possible to filter multiple ids at the same time separated by commas.
+products = client.list_products(created_start="2023-01-01")
+```
 #### - Create product
 ```python
 product = client.create_product("AAAAA111233", "PS6", 1254, "Product")
@@ -48,6 +55,12 @@ product = client.create_product("AAAAA111233", "PS6", 1254, "Product")
 #   {"barcode": "B0123", "brand": "Gef", "tariff": "151612", "model": "Loiry"}
 ```
 ### Customers
+#### - List customers
+```python
+# filter options: identification, branch_office, created_start, created_end, updated_start, updated_end
+# date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
+customers = client.list_customers(created_start="2023-01-01")
+```
 #### - Create customer
 ```python
 customer = client.create_customer(
@@ -82,6 +95,36 @@ customer = client.create_customer(
 # related_users: dictionary with two values "seller_id" and "collector_id"
 #   Example: {"seller_id": 629, "collector_id": 629}
 ```
+### Invoices
+#### Create Invoice
+```python
+fv = client.create_invoice(
+    {"id": 24446},
+    "2023-02-02",
+    {"identification": "1040570645", "branch_office": 0},
+    1018,
+    [{ "code": "DEX6360", "description": "Shirt", "quantity": 1, "price": 8000.00, "discount": 0}],
+    [{"id": 9485, "value": 8000.00, "due_date": "2023-01-01"}] 
+)
+# document: document type id. Dict with the following structure: {"id": 24446} \n
+# date: yyyy-MM-dd format \n
+# customer: customer identification and branch_office - {"identification": "13832081", "branch_office": 0} \n
+# seller: seller id \n
+# items: list of items with the following structure: \n
+# [
+#     {
+#         "code": "Item-1", # must be a valid code.
+#         "description": "Camiseta de algodón",
+#         "quantity": 1,
+#         "price": 1069.77,
+#         "discount": 0,
+#         "taxes": [{"id": 13156}]
+#     }
+# ] \n
+# payments: list with the following structure: [{"id": 5636, "value": 1273.03, "due_date": "2021-03-19"}] \n
+# currency: only for foreign exchange currency: {"code": "USD", "exchange_rate": 3825.03} \n
+# Note: The total payments must be equal to the total invoice.
+```
 ### Catalogues
 #### - List group accounts
 ```python
@@ -98,4 +141,14 @@ price_lists = client.list_price_lists()
 #### - List cost centers
 ```python
 cost_centers = client.list_cost_centers()
+```
+#### - List document types
+```python
+# options are "FV", "NC" or "RC"
+doc_types = client.list_document_types("FV")
+```
+#### - List payment types
+```python
+# options are "FV", "NC" or "RC"
+payments = client.list_payment_types("FV")
 ```
