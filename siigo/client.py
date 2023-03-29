@@ -34,6 +34,7 @@ class Client(object):
         updated_end: str = None,
         id: str = None,
         page_size: str = None,
+        page: str = None
     ):
         """
         date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
