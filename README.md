@@ -34,9 +34,10 @@ users = client.list_users()
 ### Products
 #### - List products
 ```python
-# filter options: code, created_start, created_end, updated_start, updated_end, id
+# filter options: code, created_start, created_end, updated_start, updated_end, id, page_size, page
 # date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
 # id: It is possible to filter multiple ids at the same time separated by commas.
+# page_size limit = 100
 products = client.list_products(created_start="2023-01-01")
 ```
 #### - Create product
@@ -57,8 +58,9 @@ product = client.create_product("AAAAA111233", "PS6", 1254, "Product")
 ### Customers
 #### - List customers
 ```python
-# filter options: identification, branch_office, created_start, created_end, updated_start, updated_end
+# filter options: identification, branch_office, created_start, created_end, updated_start, updated_end, page_size, page
 # date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
+# page_size limit = 100
 customers = client.list_customers(created_start="2023-01-01")
 ```
 #### - Create customer

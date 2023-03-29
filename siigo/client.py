@@ -33,6 +33,7 @@ class Client(object):
         updated_start: str = None,
         updated_end: str = None,
         id: str = None,
+        page_size: str = None,
     ):
         """
         date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
@@ -98,6 +99,8 @@ class Client(object):
         created_end: str = None,
         updated_start: str = None,
         updated_end: str = None,
+        page_size: str = None,
+        page: str = None
     ):
         """
         date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
