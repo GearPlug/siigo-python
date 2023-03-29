@@ -29,7 +29,8 @@ client = Client(token=access_token)
 ### Users
 #### - List users
 ```python
-users = client.list_users()
+# page_size limit = 100
+users = client.list_users(page_size=25, page=1)
 ```
 ### Products
 #### - List products

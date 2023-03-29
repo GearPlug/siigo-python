@@ -22,8 +22,13 @@ class Client(object):
     def set_token(self, access_token):
         self.headers.update(Authorization=access_token)
 
-    def list_users(self):
-        return self.get("v1/users")
+    def list_users(self, page_size: str = None, page: str = None):
+        args = locals()
+        params = {}
+        for arg in args:
+            if args[arg] is not None and arg != "self":
+                params.update({arg: args[arg]})
+        return self.get("v1/users", params=params)
 
     def list_products(
         self,
@@ -34,11 +39,12 @@ class Client(object):
         updated_end: str = None,
         id: str = None,
         page_size: str = None,
-        page: str = None
+        page: str = None,
     ):
         """
         date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
         id: Is possible to filter multiple ids at the same time separated by commas.
+        page_size limit = 100
         """
         args = locals()
         params = {}
@@ -101,10 +107,11 @@ class Client(object):
         updated_start: str = None,
         updated_end: str = None,
         page_size: str = None,
-        page: str = None
+        page: str = None,
     ):
         """
-        date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
+        date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'.
+        page_size limit = 100
         """
         args = locals()
         params = {}
