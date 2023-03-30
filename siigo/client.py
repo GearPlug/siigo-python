@@ -126,6 +126,8 @@ class Client(object):
         id_type: str,
         name: list,
         contacts: list,
+        phones: list,
+        address: dict,
         identification: str,
         check_digit: str = None,
         type: str = None,
@@ -134,8 +136,6 @@ class Client(object):
         active: bool = None,
         vat_responsible: bool = None,
         fiscal_responsibilities: list = None,
-        address: dict = None,
-        phones: list = None,
         comments: str = None,
         related_users: dict = None,
     ):
