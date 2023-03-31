@@ -70,8 +70,14 @@ customer = client.create_customer(
     "Person", 
     "13", 
     ["Juan Carlos", "Rios"], 
+    [{"first_name": "Juan", "last_name": "Rios", "email": "juan.rios@contact.com",}],
+    [{"indicative": "57", "number": "3006113345", "extension": "132"}],
+    {
+        "address": "Calle 47 Bis A 28-55",
+        "city": {"country_code": "co", "state_code": "19", "city_code": "19001"},
+        "postal_code": "110911",
+    },
     "1019300200",
-    [{"first_name": "Juan", "last_name": "Rios", "email": "juan.rios@contact.com",}]
 )
 # person_type: options are "Person" or "Company"
 # id_type: check siigo id types: https://siigoapi.docs.apiary.io/#reference/clientes/crear-cliente/crear-cliente
@@ -85,16 +91,16 @@ customer = client.create_customer(
 #     "phone": {"indicative": "57", "number": "3006003345", "extension": "132"}
 #     }
 #   ]
-# type: options are "Customer", "Supplier" or "Other"
-# fiscal_responsibilities: options are "R-99-PN", "O-13", "O-15", "O-23" or "O-47"
+# phones: list of dictionaries with the following structure:
+#   [{"indicative": "57", "number": "3006003345", "extension": "132"}]
 # address: object with the following structure:
 #   {
 #     "address": "Cra. 18 #79A - 42",
 #     "city": {"country_code": "Co", "state_code": "19", "city_code": "19001"},
 #     "postal_code": "110911"
 #   }
-# phones: list of dictionaries with the following structure:
-#   [{"indicative": "57", "number": "3006003345", "extension": "132"}]
+# type: options are "Customer", "Supplier" or "Other"
+# fiscal_responsibilities: options are "R-99-PN", "O-13", "O-15", "O-23" or "O-47"
 # related_users: dictionary with two values "seller_id" and "collector_id"
 #   Example: {"seller_id": 629, "collector_id": 629}
 ```
