@@ -173,6 +173,28 @@ class Client(object):
                 body.update({arg: args[arg]})
         return self.post("v1/customers", data=json.dumps(body))
 
+    def list_invoices(
+        self,
+        identification: str = None,
+        branch_office: int = None,
+        created_start: str = None,
+        created_end: str = None,
+        updated_start: str = None,
+        updated_end: str = None,
+        page_size: str = None,
+        page: str = None,
+    ):
+        """
+        date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'.
+        page_size limit = 100
+        """
+        args = locals()
+        params = {}
+        for arg in args:
+            if args[arg] is not None and arg != "self":
+                params.update({arg: args[arg]})
+        return self.get("v1/invoices", params=params)
+
     def create_invoice(
         self,
         document: dict,

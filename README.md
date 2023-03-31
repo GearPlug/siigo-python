@@ -105,6 +105,13 @@ customer = client.create_customer(
 #   Example: {"seller_id": 629, "collector_id": 629}
 ```
 ### Invoices
+#### - List invoices
+```python
+# filter options: identification, branch_office, created_start, created_end, updated_start, updated_end, page_size, page
+# date formats: 'yyyy-MM-dd' or 'yyyy-MM-ddTHH:mm:ssZ'
+# page_size limit = 100
+invoices = client.list_invoices(created_start="2023-01-01")
+```
 #### Create Invoice
 ```python
 fv = client.create_invoice(
