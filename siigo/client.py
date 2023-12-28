@@ -7,7 +7,11 @@ from siigo.exceptions import UnauthorizedError, WrongFormatInputError, ContactsL
 
 class Client(object):
     URL = "https://api.siigo.com/"
-    headers = {"Content-Type": "application/json", "Accept": "application/json"}
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Partner-Id": "GearPlug"
+    }
 
     def __init__(self, email: str = None, access_key: str = None, token: str = None):
         self.email = email
